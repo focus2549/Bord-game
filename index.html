@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> N TER bord game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap');
+        body { font-family: 'Noto Sans Thai', sans-serif; background-color: #fcfcfc; }
+        .hero-gradient { background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%); }
+        .filter-btn.active { background-color: #509dd8; color: white; border-color: #2563eb; }
+    </style>
+</head>
+<body>
+    <header class="bg-white border-b sticky top-0 z-40">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-black text-2xl text-blue-600">NTER bord game </div>
+            <div class="hidden md:flex gap-6 text-sm font-bold text-slate-600 items-center">
+                <a href="index.html" class="hover:text-blue-600 transition">Home</a>
+                <a href="admin.html" class="ml-4 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition shadow-md">
+                    + เพิ่มเกมใหม่
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-gradient py-20 text-white shadow-inner">
+        <div class="container mx-auto px-6 text-center md:text-left">
+            <h1 class="text-5xl font-black mb-4">แหล่งรวมบอร์ดเกมสุดมันส์</h1>
+            <p class="text-blue-100 text-lg mb-8">ค้นหาบอร์ดเกมที่ใช่สำหรับคุณ และเพื่อนๆ ของคุณได้ที่นี่</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-slate-800 mb-2">หมวดหมู่เกม</h2>
+            <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full mb-8"></div>
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button onclick="filterGames('ทั้งหมด')" class="filter-btn active px-6 py-2 rounded-full border border-slate-200 font-bold transition-all">ทั้งหมด</button>
+                <button onclick="filterGames('วางแผน')" class="filter-btn px-6 py-2 rounded-full border border-slate-200 text-slate-500 font-bold hover:border-blue-600 transition-all">วางแผน</button>
+                <button onclick="filterGames('ปาร์ตี้')" class="filter-btn px-6 py-2 rounded-full border border-slate-200 text-slate-500 font-bold hover:border-blue-600 transition-all">ปาร์ตี้</button>
+                <button onclick="filterGames('ทั่วไป')" class="filter-btn px-6 py-2 rounded-full border border-slate-200 text-slate-500 font-bold hover:border-blue-600 transition-all">ทั่วไป</button>
+                <button onclick="filterGames('ผจญภัย')" class="filter-btn px-6 py-2 rounded-full border border-slate-200 text-slate-500 font-bold hover:border-blue-600 transition-all">ผจญภัย</button>
+            </div>
+        </div>
+        <div id="game-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </main>
+
+    <div id="game-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="relative bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl p-8 overflow-y-auto max-h-[90vh]">
+            <div id="modal-image-box" class="w-full h-64 bg-slate-100 rounded-3xl mb-6 overflow-hidden"></div>
+            <h2 id="modal-title" class="text-3xl font-bold mb-2 text-slate-800"></h2>
+            <p id="modal-category" class="text-blue-600 font-bold mb-4 italic uppercase text-sm"></p>
+            <div class="bg-slate-50 p-4 rounded-2xl mb-8">
+                <p class="text-xs font-bold text-slate-400 mb-1 uppercase">รายละเอียดเกม</p>
+                <p id="modal-details" class="text-slate-600 leading-relaxed"></p>
+            </div>
+            <button onclick="closeModal()" class="w-full py-4 bg-blue-600 text-white font-bold rounded-2xl shadow-xl hover:bg-blue-700 transition">ปิดหน้าต่าง</button>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+    <script>
+        function closeModal() { document.getElementById('game-modal').classList.add('hidden'); }
+    </script>
+    <!-- Footer Section -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                
+                <div>
+                    <div class="font-black text-2xl text-blue-400 mb-6">NTER BORD GAME</div>
+                    <p class="text-slate-400 leading-relaxed">
+                        ศูนย์รวมบอร์ดเกมคุณภาพที่คัดสรรมาเพื่อความสนุกของคุณและเพื่อนๆ 
+                        ไม่ว่าจะเป็นเกมวางแผน ปาร์ตี้ หรือผจญภัย เรามีครบจบในที่เดียว
+                    </p>
+                </div>
+
+            
+                <div>
+                    <h4 class="text-lg font-bold mb-6">เมนูหลัก</h4>
+                    <ul class="space-y-4 text-slate-400">
+                        <li><a href="index.html" class="hover:text-blue-400 transition">หน้าแรก</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">หมวดหมู่ทั้งหมด</a></li>
+                        <li><a href="admin.html" class="hover:text-blue-400 transition">เพิ่มเกมใหม่</a></li>
+                    </ul>
+                </div>
+
+            
+                <div>
+                    <h4 class="text-lg font-bold mb-6">ติดต่อเรา</h4>
+                    <ul class="space-y-4 text-slate-400">
+                        <li class="flex items-center gap-3">
+                            <span class="text-blue-400">📍</span>
+                            <span>42/16 ถ.อำมาตย์ ต.ในเมือง อ.เมือง จ.ขอนแก่น, Khon Kaen, Thailand, Khon Kaen</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-blue-400">📞</span>
+                            <span>092 614 2919</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-blue-400">✉️</span>
+                            <span>nterboardgamecafe@gmail.com
+</span>
+                        </li>
+                    </ul>
+                
+    
+    <a href="https://www.facebook.com/profile.php?id=100077123193616" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 transition">
+       FB
+    </a>
+                    <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Flin.ee%2FguJpOJu%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExU2k1djVCWk1xWlVxRW16bXNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7zwnZnXcfs9oDIZj4LgneAeWbnbkAUL-9AemMCT0qS2M8LIoMY9mfaeT5AbQ_aem_CCfog5-E3UpFJfD04K9CRg&h=AT6qOezVQZQXDgvmivx24i9DtbeKfLHHmLUlJsMeqBWu7SjkwplJ83jczC2rIk2lc4NR2vuRhcHCjfPAFZY8V7G_BDzGBITLvts8uKw3RFrrg-M7jtA4AcLbkRxyQjikPuw6Gg" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-green-600 transition">
+       Line
+    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
+                <p>© Nter bord game</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
